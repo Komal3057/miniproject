@@ -762,12 +762,27 @@
           />
           <title>Search Page</title>
         </head>
-        <body>
-          <form id="searchForm">
+        <body
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+          "
+        >
+          <form id="searchForm" style="text-align: center">
             <input
               type="text"
               id="searchInput"
               placeholder="Search for a plant..."
+              style="
+                display: block;
+                margin: 0.5em auto;
+                width: 300px;
+                height: 40px;
+                font-size: 16px;
+              "
             />
             <button type="submit">Search</button>
           </form>
