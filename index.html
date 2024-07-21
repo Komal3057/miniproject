@@ -760,32 +760,61 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <title>Search Page</title>
+          <title>Search Form</title>
+          <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          />
         </head>
-        <body
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-          "
-        >
-          <form id="searchForm" style="text-align: center">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search for a plant..."
-              style="
-                display: block;
-                margin: 0.5em auto;
-                width: 300px;
-                height: 40px;
-                font-size: 16px;
-              "
-            />
-            <button type="submit">Search</button>
-          </form>
+
+        <body>
+          <div class="container text-center mt-3">
+            <form id="searchForm" class="d-flex flex-column align-items-center">
+              <div class="input-group mb-2" style="width: 300px">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-leaf"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  id="searchInput"
+                  class="form-control"
+                  placeholder="Search for a plant..."
+                  style="height: 40px; font-size: 16px"
+                />
+              </div>
+              <div class="input-group mb-2" style="width: 300px">
+                <select id="familySelect" class="form-control">
+                  <option value="chenopodiaceae">Chenopodiaceae</option>
+                  <option value="celastraceae">Celastraceae</option>
+                  <option value="asclepiadaceae">Asclepiadaceae</option>
+                  <option value="asteraceae">Asteraceae</option>
+                  <option value="berberidaceae">Berberidaceae</option>
+                  <option value="bignoniaceae">Bignoniaceae</option>
+                  <option value="caesalpiniaceae">Caesalpiniaceae</option>
+                  <option value="campanulaceae">Campanulaceae</option>
+                  <option value="capparaceae">Capparaceae</option>
+                  <option value="caprifoliaceae">Caprifoliaceae</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                class="btn mb-3"
+                style="background-color: lightyellow; border: 1px solid #ccc"
+              >
+                <i class="fas fa-seedling"></i> Search
+              </button>
+            </form>
+          </div>
+
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
           <div id="results"></div>
 
           <script>
@@ -794,7 +823,11 @@
               .addEventListener("submit", function (event) {
                 event.preventDefault();
                 const query = document.getElementById("searchInput").value;
-                fetch(`http://localhost:8081/search?q=${query}`) // Ensure this matches your server URL and port
+                const family = document.getElementById("familySelect").value;
+                console.log(
+                  `Fetching data for table: ${family} with query: ${query}`
+                );
+                fetch(`http://localhost:8081/search?table=${family}&q=${query}`)
                   .then((response) => {
                     if (!response.ok) {
                       throw new Error("Network response was not ok");
@@ -810,13 +843,14 @@
                       data.forEach((item) => {
                         const itemDiv = document.createElement("div");
                         itemDiv.innerHTML = `
-            <h3>${item.botanical_scientific_name}</h3>
-            <p>Trade Name: ${item.general_trade_name}</p>
-            <p>Family: ${item.family}</p>
-            <p>Parts Used: ${item.parts_used}</p>
-            <p>Chemical Components: ${item.chemical_components}</p>
-            <p>Uses: ${item.uses}</p>
-          `;
+              <h3>${item.botanical_scientific_name}</h3>
+              <p>Trade Name: ${item.general_trade_name}</p>
+              <p>Family: ${item.family}</p>
+              <p>Parts Used: ${item.parts_used}</p>
+              <p>Chemical Components: ${item.chemical_components}</p>
+              <p>Uses: ${item.uses}</p>
+              <p>Used for diabetes: ${item.diabetes_use || "Not specified"}</p>
+            `;
                         resultsDiv.appendChild(itemDiv);
                       });
                     }
@@ -828,7 +862,9 @@
                   });
               });
           </script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
         </body>
+
         <!-- <script>
           function search() {
             const query = document.getElementById("searchQuery").value;
