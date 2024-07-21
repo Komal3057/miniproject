@@ -90,8 +90,13 @@
 // });
 const express = require("express");
 const mysql = require("mysql");
+const cors = require("cors");
+const path = require("path");
 const app = express();
-const port = 3000;
+const port = 8081;
+
+app.use(cors());
+app.use(express.static(__dirname));
 
 const connection = mysql.createConnection({
   host: "localhost",

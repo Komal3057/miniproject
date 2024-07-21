@@ -794,7 +794,7 @@
               .addEventListener("submit", function (event) {
                 event.preventDefault();
                 const query = document.getElementById("searchInput").value;
-                fetch(`http://localhost:3000/search?q=${query}`) // Ensure this matches your server URL and port
+                fetch(`http://localhost:8081/search?q=${query}`) // Ensure this matches your server URL and port
                   .then((response) => {
                     if (!response.ok) {
                       throw new Error("Network response was not ok");
