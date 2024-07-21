@@ -1,0 +1,33 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+.fancy-button {
+  background-color: #ff6f61;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.fancy-button:hover {
+  background-color: #ff9a8b;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+.fancy-button:active {
+  transform: translateY(1px);
+}
