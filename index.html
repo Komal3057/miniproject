@@ -827,7 +827,7 @@
                 console.log(
                   `Fetching data for table: ${family} with query: ${query}`
                 );
-                fetch(`http://localhost:8081/search?table=${family}&q=${query}`)
+                fetch(`http://localhost:8080/search?table=${family}&q=${query}`)
                   .then((response) => {
                     if (!response.ok) {
                       throw new Error("Network response was not ok");
@@ -6582,6 +6582,7 @@
             >
               <div class="tn-atom"></div>
             </div>
+
             <div
               class="t396__elem tn-elem tn-elem__7745164081689253802576 t-animate"
               data-elem-id="1689253802576"
@@ -6681,6 +6682,7 @@
                 +91 1234567890
               </div>
             </div>
+
             <div
               class="t396__elem tn-elem tn-elem__7745164081689253802594 t-animate"
               data-elem-id="1689253802594"
@@ -6715,6 +6717,7 @@
                 DSATM, Karnataka<br />India.
               </div>
             </div>
+
             <div
               class="t396__elem tn-elem tn-elem__7745164081689253802598 t-animate"
               data-elem-id="1689253802598"
